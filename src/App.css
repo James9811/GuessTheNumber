@@ -1,0 +1,44 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.numbers-container{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.secret-container{
+ margin: 20px;
+}
+
+.lives-container{
+  font-size: xxx-large;
+}
+
+.messages-container{
+  font-size: xx-large;
+}
+
+.secret-number{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black; 
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+}
+
+.secret-number label{
+  font-size: xxx-large;
+}
