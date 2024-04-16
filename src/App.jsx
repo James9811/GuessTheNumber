@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import { AiFillCrown } from "react-icons/ai";
 import { MdQuestionMark } from "react-icons/md";
 import { FiArrowDown, FiArrowUp } from "react-icons/fi";
 import { IoHeartSharp } from "react-icons/io5";
@@ -7,6 +8,7 @@ import { GiDeadHead } from "react-icons/gi";
 function App() {
 
 	const [lives, setLives] = useState(3);
+	const [win, setWin] = useState(false);
 	const [livesMessage, setLivesMessage] = useState(<IoHeartSharp/>);
 	const [selectedNumber, setSelectedNumber] = useState();
 	const [secretNumber, setSecretNumber] = useState();
@@ -22,10 +24,12 @@ function App() {
 	}
 
 	const startGame = () => {
+		setSelectedNumber();
 		setSuccess(false);
+		setWin(false);
 		const number = randomNumber();
 		setSecretNumber(number);
-		setGameMessage("Guess the Number");
+		setGameMessage("Guess the number");
 		setIcons(<MdQuestionMark />);
 		setLives(3);
 	}
@@ -35,10 +39,11 @@ function App() {
 	}
 
 	useEffect(() => {
-		if(secretNumber){
+		if(secretNumber, selectedNumber){
 			if(selectedNumber === secretNumber){
 				setGameMessage("You guessed the number");
-				setSuccess(true)
+				setSuccess(true);
+				setWin(true);
 			} 
 			else if (selectedNumber > secretNumber){
 				setGameMessage("A little bit lower");
@@ -71,7 +76,7 @@ function App() {
     	<>
 			<div className='container'>
 				<div className='lives-container'>
-					<div>{livesMessage}</div>
+					<div>{win ? <AiFillCrown /> : livesMessage }</div>
 				</div>
 				<div className='game-header'>
 					<h1>GUESS THE NUMBER</h1>
@@ -80,6 +85,7 @@ function App() {
 					<div className='secret-number'>
 						<label>{success ? secretNumber : icons}</label>
 					</div>
+				</div>
 					<div className='numbers-container'>
 						{
 							numbers.map((number, index) => {
@@ -96,7 +102,6 @@ function App() {
 					<div className='button-game'>
 						<button onClick={startGame}>Start Game</button>
 					</div>
-				</div>
 		</div>
 
     </>
